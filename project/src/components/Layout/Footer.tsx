@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center space-x-2 text-gray-600">
-            <span>Feito com</span>
+            <span>Desenvolvido por Otto B. Coutinho</span>
             <Heart className="h-4 w-4 text-red-500 fill-current" />
-            <span>por uma equipe internacional em Budapeste, Hungria</span>
+            <span>com carinho para você.</span>
           </div>
           
           <div className="flex items-center justify-center space-x-2">
@@ -30,8 +30,15 @@ const Footer: React.FC = () => {
               Attribution-NonCommercial-ShareAlike 4.0 International.
             </p>
             <p>
-              Caso você encontre algum erro de digitação, de gramática ou outros problemas, 
-              seja gentil e nos avise pelo site oficial acima.
+              Para saber mais sobre o projeto Year Compass, visite 
+              <a
+                href="https://yearcompass.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 hover:text-primary-700 font-medium"
+              >
+                yearcompass.com
+              </a>.
             </p>
           </div>
         </div>
