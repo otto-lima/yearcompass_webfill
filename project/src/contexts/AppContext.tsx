@@ -142,19 +142,32 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   useEffect(() => {
-    const savedData = localStorage.getItem('yearcompass-data');
-    if (savedData) {
+    // Load saved user data
+    const savedUser = localStorage.getItem('yearcompass-user');
+    if (savedUser) {
       try {
-        const parsedData = JSON.parse(savedData);
-        dispatch({ type: 'LOAD_DATA', payload: parsedData });
+        const user = JSON.parse(savedUser);
+        dispatch({ type: 'SET_USER', payload: user });
+        
+        // Load user's progress data
+        const savedData = localStorage.getItem(`yearcompass-data-${user.id}`);
+        if (savedData) {
+          const parsedData = JSON.parse(savedData);
+          dispatch({ type: 'LOAD_DATA', payload: { ...parsedData, user } });
+        } else {
+          dispatch({ type: 'SET_CURRENT_PAGE', payload: 'welcome' });
+        }
       } catch (error) {
-        console.error('Failed to load saved data:', error);
+        console.error('Failed to load saved user data:', error);
+        localStorage.removeItem('yearcompass-user');
       }
     }
   }, []);
 
   const saveProgress = () => {
-    localStorage.setItem('yearcompass-data', JSON.stringify(state));
+    if (state.user) {
+      localStorage.setItem(`yearcompass-data-${state.user.id}`, JSON.stringify(state));
+    }
   };
 
   useEffect(() => {
